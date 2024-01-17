@@ -52,10 +52,9 @@ const StyledLink = styled(Link)`
   margin-top: 1rem;
 `;
 
-const SignupForm: React.FC<SignupFormProps> = () => {
+const SigninForm: React.FC<SignupFormProps> = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,7 +64,7 @@ const SignupForm: React.FC<SignupFormProps> = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <StyledHeading>Sign Up</StyledHeading>
+      <StyledHeading>Sign in</StyledHeading>
       <StyledInput
         label="Username"
         value={username}
@@ -77,16 +76,11 @@ const SignupForm: React.FC<SignupFormProps> = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <StyledInput
-        label="Repeat Password"
-        type="password"
-        value={repeatPassword}
-        onChange={(e) => setRepeatPassword(e.target.value)}
-      />
-      <StyledButton type="submit">Submit</StyledButton>
-      <StyledLink href="#">Already signed up? Go to sign in</StyledLink>
+
+      <StyledButton type="submit">Button</StyledButton>
+      <StyledLink href="#">Already signed up? Go to sign up</StyledLink>
     </StyledForm>
   );
 };
 
-export default SignupForm;
+export default SigninForm;
