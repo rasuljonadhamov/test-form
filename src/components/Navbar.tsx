@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import logo from "../../public/profile.jpg";
 
@@ -47,18 +48,40 @@ const StyledNavbar = styled.nav`
   border-bottom: 1px solid #ccc;
 `;
 
+const StyledNavbars = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #fff;
+`;
+
 const StyledSearchBar = styled(TextField)`
   margin-right: 1rem;
   margin-left: 1rem;
 `;
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC = ({ onSearch }) => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const handleSearch = () => {
+    onSearch(searchQuery);
+  };
+
   return (
     <StyledNavbar>
-      <StyledNavbar>
+      <StyledNavbars>
         <SiteLogo />
-        <StyledSearchBar placeholder="Search books..." />
-      </StyledNavbar>
+        <StyledSearchBar
+          placeholder="Search books..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          sx={{ color: "inherit", marginRight: 1, minWidth: 200 }}
+        />
+        <IconButton color="inherit" onClick={handleSearch}>
+          <SearchIcon />
+        </IconButton>
+      </StyledNavbars>
       <div>
         <IconButton>
           <svg

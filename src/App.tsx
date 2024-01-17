@@ -57,15 +57,25 @@ const sampleBooks = [
 
 function App() {
   const [books, setBooks] = useState(sampleBooks);
+  const [filteredBooks, setFilteredBooks] = useState<Book[]>(sampleBooks);
 
   const handleAddBook = (newBook) => {
     setBooks((prevBooks) => [...prevBooks, newBook]);
+
+     setFilteredBooks((prevBooks) => [...prevBooks, newBook]);
   };
+
+   const handleSearch = (searchQuery: string) => {
+     const filtered = books.filter((book) =>
+       book.title.toLowerCase().includes(searchQuery.toLowerCase())
+     );
+     setFilteredBooks(filtered);
+   };
 
   return (
     <div>
-      <Navbar />
-      <BookList books={books} onAddBook={handleAddBook} />
+      <Navbar onSearch={handleSearch} />
+      <BookList books={filteredBooks} onAddBook={handleAddBook} />
     </div>
   );
 }

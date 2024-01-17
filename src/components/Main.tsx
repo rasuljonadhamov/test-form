@@ -24,7 +24,7 @@ const MainSection = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 `;
 
 const BookContainer = styled.div`
@@ -37,6 +37,24 @@ const BookContainer = styled.div`
 
 const BookItem = styled.div`
   margin-bottom: 10px;
+  padding: 32px;
+  background-color: #fff;
+`;
+
+const StyledTotalBooksCount = styled.div`
+  font-weight: 700;
+  font-size: 36px;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 12px;
+  display: inline;
+`;
+
+const StyledTexts = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
 `;
 
 const BookList: React.FC<BookListProps> = ({ books, onAddBook }) => {
@@ -70,7 +88,23 @@ const BookList: React.FC<BookListProps> = ({ books, onAddBook }) => {
 
   return (
     <MainSection>
-      <Typography variant="h4">My Books</Typography>
+      <StyledTexts>
+        <div>
+          <Typography variant="h4">
+            You've got{" "}
+            <StyledTotalBooksCount>{books.length} book.</StyledTotalBooksCount>
+          </Typography>
+          <Typography>Your books today</Typography>
+        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleOpenModal}
+          style={{ marginTop: "10px" }}
+        >
+          Create a book
+        </Button>
+      </StyledTexts>
 
       <BookContainer>
         {books.map((book, index) => (
@@ -81,17 +115,6 @@ const BookList: React.FC<BookListProps> = ({ books, onAddBook }) => {
           </BookItem>
         ))}
       </BookContainer>
-
-      <Typography variant="h6">Total Books: {books.length}</Typography>
-
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleOpenModal}
-        style={{ marginTop: "10px" }}
-      >
-        Add Book
-      </Button>
 
       <Dialog open={isModalOpen} onClose={handleCloseModal}>
         <DialogTitle>Add New Book</DialogTitle>
